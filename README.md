@@ -106,4 +106,4 @@ curl -X GET "http://localhost:8080/advert/list/0?sort=-price"
 
 # Архитектура
 
-![img.png](img.png)
+![arch.png](arch.png)
