@@ -1,0 +1,1 @@
+# tast_for_AvitoAdvertising
