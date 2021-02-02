@@ -52,6 +52,7 @@ func (handler *Handler) HandleAdvertCreation(w http.ResponseWriter, r *http.Requ
 	handler.logger.Info(advert)
 
 	if err != nil {
+		handler.logger.Errorf("error in CreateAdvert: %v", err)
 		response := CreatFailedResp()
 		w.Write(response)
 		return
@@ -61,6 +62,7 @@ func (handler *Handler) HandleAdvertCreation(w http.ResponseWriter, r *http.Requ
 	response.ResultCode = "success"
 	resp, err := json.Marshal(response)
 	if err != nil {
+		handler.logger.Errorf("error in maishaling json: %v", err)
 		response := CreatFailedResp()
 		w.Write(response)
 		return
@@ -72,16 +74,20 @@ func (handler *Handler) HandlerGetAdvert(w http.ResponseWriter, r *http.Request)
 	handler.logger.Info("HandlerGetAdvert")
 	vars := mux.Vars(r)
 	id, _ := strconv.Atoi(vars["id"])
-	advert, err := handler.store.Adverts().GetAdvertById(id)
+	optionalFields := r.URL.Query().Get("fields")
+	advert, err := handler.store.Adverts().GetAdvertById(id, optionalFields)
 	if err != nil {
+		handler.logger.Errorf("error in GetAdvertById: %v", err)
 		w.Write([]byte("{}"))
 		return
 	}
 	response, err := json.Marshal(advert)
 	if err != nil {
+		handler.logger.Errorf("error in marshaling json: %v", err)
 		w.Write([]byte("{}"))
 		return
 	}
+
 	w.Write(response)
 }
 
@@ -93,6 +99,7 @@ func (handler *Handler) HandlerGetAllAdverts(w http.ResponseWriter, r *http.Requ
 
 	adverts, err := handler.store.Adverts().GetAllAdverts(sort)
 	if err != nil {
+		handler.logger.Errorf("error in GetAllAdverts: %v", err)
 		w.Write([]byte("[]"))
 		return
 	}
@@ -109,6 +116,7 @@ func (handler *Handler) HandlerGetAllAdverts(w http.ResponseWriter, r *http.Requ
 	adverts = adverts[pageBegin:pageEnd]
 	response, err := json.Marshal(adverts)
 	if err != nil {
+		handler.logger.Errorf("error in marshaling json: %v", err)
 		w.Write([]byte("[]"))
 		return
 	}
