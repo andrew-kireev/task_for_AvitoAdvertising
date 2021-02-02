@@ -107,3 +107,49 @@ curl -X GET "http://localhost:8080/advert/list/0?sort=-price"
 # Архитектура
 
 ![arch.png](arch.png)
+
+
+Запрос приходит на http-сервер. Сервер описан структурой, приведенной ниже:
+
+```
+type HttpServer struct {
+	Conf    *Config
+	Handler *handler.Handler
+	store   *store.Store
+	logger  *logrus.Logger
+}
+```
+
+Сервер хранит в себе структуру Handler. С помощью нее происходит дальнейшая обработка запроса.
+Хендлер внутри себя использует роутер mux.Router из библиотеки "github.com/gorilla/mux".
+
+
+```
+type Handler struct {
+	router *mux.Router
+	store  *store.Store
+	logger *logrus.Logger
+}
+```
+
+Далее хендлер вытаскивает параметры из запроса, получается доступ к полю advertRep AdvertRepository,
+структуры store и из него получает доступ к репозиторию AdvertRepository.
+
+```
+type Store struct {
+	db        *sql.DB
+	advertRep *AdvertRepository
+	config    *Config
+}
+```
+
+А уже с помощью структуры *AdvertRepository мы обращаемся к базе данных PostgresSql.
+adverts
+
+```
+type AdvertRepository struct {
+	store *Store
+}
+```
+
+Затем данные возвращаются в хендлер, там формируется и отдается ответ пользователю.
