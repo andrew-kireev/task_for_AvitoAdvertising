@@ -74,7 +74,7 @@ func (handler *Handler) HandlerGetAdvert(w http.ResponseWriter, r *http.Request)
 	handler.logger.Info("HandlerGetAdvert")
 	vars := mux.Vars(r)
 	id, _ := strconv.Atoi(vars["id"])
-	optionalFields := r.URL.Query().Get("fields")
+	optionalFields := r.FormValue("fields")
 	advert, err := handler.store.Adverts().GetAdvertById(id, optionalFields)
 	if err != nil {
 		handler.logger.Errorf("error in GetAdvertById: %v", err)
