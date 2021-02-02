@@ -16,9 +16,9 @@ type HttpServer struct {
 
 func NewServer(config *Config) (*HttpServer, error) {
 	serv := &HttpServer{
-		Conf:   config,
+		Conf:    config,
 		Handler: &handler.Handler{},
-		logger: logrus.New(),
+		logger:  logrus.New(),
 	}
 
 	err := serv.ConfigLogger()

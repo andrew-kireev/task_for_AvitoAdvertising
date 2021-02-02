@@ -23,7 +23,6 @@ type CreationResponse struct {
 	AdvertId   int    `json:"id"`
 }
 
-
 func (handler *Handler) ConfigHandler(store *store.Store, logger *logrus.Logger) {
 	handler.router = mux.NewRouter()
 	handler.router.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {

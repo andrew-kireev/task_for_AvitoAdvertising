@@ -6,9 +6,9 @@ import (
 )
 
 type Store struct {
-	db *sql.DB
+	db        *sql.DB
 	advertRep *AdvertRepository
-	config *Config
+	config    *Config
 }
 
 func NewStore(config *Config) *Store {

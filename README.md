@@ -36,7 +36,7 @@ docker-compose up
 
 ```
 curl -X POST -d "name=some name" -d "description=some description" \
--d "links=link1 link2 link3" -d "price=1000" http://localhost:8080/advert/create
+-d "links=link1 link2 link3" -d "price=1000" "http://localhost:8080/advert/create"
 ```
 
 Ответ:
@@ -103,3 +103,7 @@ curl -X GET "http://localhost:8080/advert/list/0?sort=-price"
 {"advert_id":9,"name":"name1","description":"description1","photo_links":"link1","price":500},
 {"advert_id":3,"name":"newadv","description":"descr","photo_links":"http","price":500}]
 ```
+
+# Архитектура
+
+![img.png](img.png)
