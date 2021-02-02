@@ -132,7 +132,7 @@ type Handler struct {
 }
 ```
 
-Далее хендлер вытаскивает параметры из запроса, получается доступ к полю advertRep AdvertRepository,
+Далее хендлер вытаскивает параметры из запроса, получает доступ к полю advertRep AdvertRepository,
 структуры store и из него получает доступ к репозиторию AdvertRepository.
 
 ```
@@ -143,8 +143,8 @@ type Store struct {
 }
 ```
 
-А уже с помощью структуры *AdvertRepository мы обращаемся к базе данных PostgresSql.
-adverts
+А уже с помощью структуры *AdvertRepository мы обращаемся к базе данных PostgresSql
+adverts.
 
 ```
 type AdvertRepository struct {
