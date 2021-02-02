@@ -10,7 +10,7 @@ import (
 	"tast_for_AvitoAdvertising/store"
 )
 
-const pageSize = 5
+const pageSize = 10
 
 type Handler struct {
 	router *mux.Router

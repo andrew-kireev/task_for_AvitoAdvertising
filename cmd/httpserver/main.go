@@ -6,6 +6,7 @@ import (
 	"github.com/BurntSushi/toml"
 	"log"
 	"tast_for_AvitoAdvertising/internal/app/server"
+	"time"
 )
 
 
@@ -20,7 +21,7 @@ func init() {
 
 func main() {
 	fmt.Println("точка входа")
-	//time.Sleep(time.Second * 5)
+	time.Sleep(time.Second * 5)
 	flag.Parse()
 
 	config := server.NewConfig()
