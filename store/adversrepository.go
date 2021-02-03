@@ -6,6 +6,12 @@ import (
 	"tast_for_AvitoAdvertising/internal/model"
 )
 
+type AdvertRepositoryInterface interface {
+	CreateAdvert(advert *model.Advert) (*model.Advert, error)
+	GetAdvertById(id int, optionalFields string) (*model.Advert, error)
+	GetAllAdverts(sort string) ([]model.Advert, error)
+}
+
 type AdvertRepository struct {
 	store *Store
 }

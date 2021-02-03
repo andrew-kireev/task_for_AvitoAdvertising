@@ -7,7 +7,7 @@ import (
 
 type Store struct {
 	db        *sql.DB
-	advertRep *AdvertRepository
+	AdvertRep AdvertRepositoryInterface
 	config    *Config
 }
 
@@ -35,13 +35,13 @@ func (store *Store) Close() {
 
 }
 
-func (store *Store) Adverts() *AdvertRepository {
-	if store.advertRep != nil {
-		return store.advertRep
+func (store *Store) Adverts() AdvertRepositoryInterface {
+	if store.AdvertRep != nil {
+		return store.AdvertRep
 	}
 
-	store.advertRep = &AdvertRepository{
+	store.AdvertRep = &AdvertRepository{
 		store: store,
 	}
-	return store.advertRep
+	return store.AdvertRep
 }
