@@ -60,6 +60,7 @@ func (handler *Handler) HandleAdvertCreation(w http.ResponseWriter, r *http.Requ
 	response.AdvertId = advert.AdvertId
 	response.ResultCode = "success"
 	resp, err := json.Marshal(response)
+	w.Header().Set("Content-Type", "application/json")
 	if err != nil {
 		handler.logger.Errorf("error in maishaling json: %v", err)
 		response := CreatFailedResp()
@@ -80,6 +81,7 @@ func (handler *Handler) HandlerGetAdvert(w http.ResponseWriter, r *http.Request)
 		w.Write([]byte("{}"))
 		return
 	}
+	w.Header().Set("Content-Type", "application/json")
 	response, err := json.Marshal(advert)
 	if err != nil {
 		handler.logger.Errorf("error in marshaling json: %v", err)
@@ -102,6 +104,7 @@ func (handler *Handler) HandlerGetAllAdverts(w http.ResponseWriter, r *http.Requ
 		w.Write([]byte("[]"))
 		return
 	}
+	w.Header().Set("Content-Type", "application/json")
 
 	var pageEnd = (page + 1) * pageSize
 	var pageBegin = page * pageSize
